@@ -13,6 +13,17 @@ plugins {
 repositories {
     mavenCentral()
     mavenLocal()
+    maven {
+        name = 'eufoniaMavenReleases'
+        url = "https://maven.eufonia.studio/releases/"
+        credentials {
+            username = System.getenv("EUFONIA_USERNAME")
+            password = System.getenv("EUFONIA_PASSWORD")
+        }
+        authentication {
+            basic(BasicAuthentication)
+        }
+    }
 }
 
 apply plugin: "org.jetbrains.kotlin.jvm"
