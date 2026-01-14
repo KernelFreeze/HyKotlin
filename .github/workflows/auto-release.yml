@@ -1,0 +1,57 @@
+name: Auto Release
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'generated/**'
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: Read Kotlin version
+        id: versions
+        run: |
+          KOTLIN_VERSION=$(cat generated/kotlin_version.txt)
+          echo "kotlin=$KOTLIN_VERSION" >> $GITHUB_OUTPUT
+          PLUGIN_VERSION=$(grep "pluginVersion=" gradle.properties | cut -d'=' -f2)
+          echo "plugin=$PLUGIN_VERSION" >> $GITHUB_OUTPUT
+          VERSION="${PLUGIN_VERSION}+kotlin.${KOTLIN_VERSION}"
+          echo "full=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Build artifacts
+        run: ./gradlew build --stacktrace
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.versions.outputs.full }}
+          name: Release ${{ steps.versions.outputs.full }}
+          body: |
+            Automated release for Kotlin ${{ steps.versions.outputs.kotlin }}
+
+            Plugin Version: ${{ steps.versions.outputs.plugin }}
+            Kotlin Version: ${{ steps.versions.outputs.kotlin }}
+          files: build/libs/*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to GitHub Packages
+        run: ./gradlew publish --stacktrace
+        env:
+          USERNAME: ${{ github.actor }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
