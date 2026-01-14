@@ -1,0 +1,19 @@
+{
+  "Group": "HyKotlin",
+  "Name": "HyKotlin",
+  "Version": "{version}",
+  "Description": "Provides Kotlin Support to Hytale",
+  "Authors": [
+    {
+      "Name": "Celeste Peláez",
+      "Email": "contact@celestelove.dev",
+      "Url": "https://celestelove.dev"
+    }
+  ],
+  "Website": "https://github.com/KernelFreeze/HyKotlin",
+  "Main": "dev.celestelove.hykotlin.HyKotlin",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false
+}
