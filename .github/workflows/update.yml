@@ -13,7 +13,13 @@ jobs:
           java-version: 21
           distribution: 'temurin'
       - run: ./gradlew updateVersions
+        env:
+          EUFONIA_USERNAME: ${{ secrets.EUFONIA_USERNAME }}
+          EUFONIA_PASSWORD: ${{ secrets.EUFONIA_PASSWORD }}
       - run: ./gradlew processMDTemplates
+        env:
+          EUFONIA_USERNAME: ${{ secrets.EUFONIA_USERNAME }}
+          EUFONIA_PASSWORD: ${{ secrets.EUFONIA_PASSWORD }}
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: update-versions
