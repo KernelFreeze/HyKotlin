@@ -1,5 +1,13 @@
 name: Run Tests
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'templates/**'
+      - 'README.md'
+  pull_request:
+    paths-ignore:
+      - 'templates/**'
+      - 'README.md'
 jobs:
   gradle:
     strategy:
