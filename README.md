@@ -9,6 +9,15 @@ This project is adapted from [fabric-language-kotlin](https://github.com/FabricM
 **Current version:** `0.2.1+kotlin.2.3.0`
 
 ## Installation
+-Add the repository to Gradle:
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/KernelFreeze/HyKotlin")
+   }
+}
+```
 
 Add HyKotlin as a Gradle dependency:
 
