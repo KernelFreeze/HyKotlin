@@ -2,6 +2,9 @@ buildscript {
     dependencies {
         def kotlinVersion = file("generated/kotlin_version.txt").text
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+
+
+        classpath("org.apache.maven:maven-artifact:3.9.6")
     }
 }
 
@@ -199,7 +202,7 @@ publishing {
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import groovy.xml.XmlSlurper
-import org.gradle.util.VersionNumber
+import org.apache.maven.artifact.versioning.ComparableVersion
 
 import java.nio.charset.StandardCharsets
 
@@ -227,9 +230,9 @@ task updateLibraryVersions {
             def versions = metadata.versioning.versions.version*.text()
 
             def latest = versions[0]
-            def latestParsed = VersionNumber.parse(latest)
+            def latestParsed = ComparableVersion(latest)
             for (def version : versions) {
-                def parsed = VersionNumber.parse(version)
+                def parsed = ComparableVersion(version)
                 if (parsed.qualifier == null && parsed > latestParsed) {
                     latestParsed = parsed
                     latest = version

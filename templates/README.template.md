@@ -37,7 +37,7 @@ Then declare it in your plugin manifest:
 {
   "Name": "YourPlugin",
   "Dependencies": {
-    "HyKotlin": ">=${PLUGIN_VERSION}"
+    "HyKotlin:HyKotlin": ">=${PLUGIN_VERSION}"
   }
 }
 ```
