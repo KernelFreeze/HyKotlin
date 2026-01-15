@@ -8,6 +8,7 @@ buildscript {
 plugins {
     id 'maven-publish'
     id "com.diffplug.spotless" version "6.19.0"
+    id "com.gradleup.shadow" version "9.0.0-beta11"
 }
 
 repositories {
@@ -66,14 +67,7 @@ libVersions.forEach { k, v ->
 version = "${project.pluginVersion}+kotlin.${kotlinVersion}" + (ENV.GITHUB_ACTIONS ? "" : ".local")
 
 configurations {
-    includeAndExpose
-
-    modApi {
-        extendsFrom includeAndExpose
-    }
-    include {
-        extendsFrom includeAndExpose
-    }
+    shadow
 }
 
 configurations.all {
@@ -89,7 +83,9 @@ dependencies {
         println("Contains missing library version, run updateLibraryVersions task!")
     } else {
         libraries.forEach {
-            includeAndExpose("${it}:${libVersions[it]}")
+            def dep = "${it}:${libVersions[it]}"
+            implementation(dep)
+            shadow(dep)
         }
     }
 }
@@ -128,6 +124,11 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.base.archivesName.get()}" }
     }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+    archiveClassifier.set("")
 }
 
 test {
