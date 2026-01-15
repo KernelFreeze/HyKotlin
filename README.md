@@ -6,7 +6,7 @@ HyKotlin embeds the Kotlin Standard Library and other essential Kotlin libraries
 
 This project is adapted from [fabric-language-kotlin](https://github.com/FabricMC/fabric-language-kotlin). See the [license file](/LICENSE) for licensing details.
 
-**Current version:** `0.2.2+kt2v3v0`
+**Current version:** `0.2.3+kt2v3v0`
 
 **Current Kotlin Version:** `2.3.0`
 
@@ -17,7 +17,8 @@ Add the repository to Gradle:
 ```kotlin
 repositories {
    maven {
-        url = uri("https://maven.pkg.github.com/KernelFreeze/HyKotlin")
+       name = "eufoniaMavenPublic"
+       url = uri("https://maven.eufonia.studio/public")
    }
 }
 ```
@@ -26,7 +27,7 @@ Add HyKotlin as a Gradle dependency:
 
 ```kotlin
 dependencies {
-    implementation("dev.celestelove:hykotlin:0.2.2+kt2v3v0")
+    implementation("dev.celestelove:hykotlin:0.2.3+kt2v3v0")
 }
 ```
 
@@ -36,7 +37,7 @@ Then declare it in your plugin manifest:
 {
   "Name": "YourPlugin",
   "Dependencies": {
-    "HyKotlin": ">=0.2.2+kt2v3v0"
+    "HyKotlin": ">=0.2.3+kt2v3v0"
   }
 }
 ```
