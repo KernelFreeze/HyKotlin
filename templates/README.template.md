@@ -8,6 +8,8 @@ This project is adapted from [fabric-language-kotlin](https://github.com/FabricM
 
 **Current version:** `${PLUGIN_VERSION}`
 
+**Current Kotlin Version:** `${KOTLIN_VERSION}`
+
 ## Installation
 
 Add the repository to Gradle:
