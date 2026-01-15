@@ -17,7 +17,8 @@ Add the repository to Gradle:
 ```kotlin
 repositories {
    maven {
-        url = uri("https://maven.pkg.github.com/KernelFreeze/HyKotlin")
+       name = "eufoniaMavenPublic"
+       url = uri("https://maven.eufonia.studio/public")
    }
 }
 ```

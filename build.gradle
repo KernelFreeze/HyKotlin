@@ -182,6 +182,17 @@ publishing {
                 password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
             }
         }
+        maven {
+            name = 'eufoniaMavenPublic'
+            url = "https://maven.eufonia.studio/public/"
+            credentials {
+                username = System.getenv("EUFONIA_USERNAME")
+                password = System.getenv("EUFONIA_PASSWORD")
+            }
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
     }
 }
 
