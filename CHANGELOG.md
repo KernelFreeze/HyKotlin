@@ -1,7 +1,7 @@
 # Changelog for v0.2.4
 
 ## Version Format Change
-- Version format changed from `0.2.2+kotlin.2.3.0` to `0.2.4+kt2v3v0` (more compact)
+- Version format changed from `0.2.2+kotlin.2.3.0` to `0.2.4+kt2v3v0` (as Hytale doesn't support build numbers with dots).
 
 ## Maven Repository
 - **Breaking:** Moved from GitHub Packages to Eufonia Maven repository
