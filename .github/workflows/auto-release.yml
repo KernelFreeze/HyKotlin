@@ -60,5 +60,3 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EUFONIA_USERNAME: ${{ secrets.EUFONIA_USERNAME }}
           EUFONIA_PASSWORD: ${{ secrets.EUFONIA_PASSWORD }}
-          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
