@@ -142,6 +142,13 @@ test {
 
 task processMDTemplates(type: Copy) {
     group = "documentation"
+
+    // Capture values at configuration time to avoid accessing project at execution time
+    def pluginVersionValue = project.pluginVersion
+    def kotlinVersionValue = kotlinVersion
+    def librariesValue = libraries
+    def libVersionsValue = libVersions
+
     doFirst {
         if (hasMissingLibVersion) {
             throw new GradleException("Contains missing library version, run updateLibraryVersions task first!")
@@ -153,12 +160,12 @@ task processMDTemplates(type: Copy) {
     filesMatching("**/*.template.md") {
         name = sourceName.replace("template.", "")
         def template = [
-                PLUGIN_VERSION   : "${project.pluginVersion}+kt${kotlinVersion.replaceAll('\\.', 'v')}",
-                KOTLIN_VERSION   : "${kotlinVersion}",
+                PLUGIN_VERSION   : "${pluginVersionValue}+kt${kotlinVersionValue.replaceAll('\\.', 'v')}",
+                KOTLIN_VERSION   : "${kotlinVersionValue}",
         ]
-        libraries.forEach {
+        librariesValue.forEach {
             def key = it.split(":", 2)[1].replace("-", "_").toUpperCase(Locale.ROOT) + "_VERSION"
-            template.put(key, libVersions[it])
+            template.put(key, libVersionsValue[it])
         }
         expand(template)
     }
